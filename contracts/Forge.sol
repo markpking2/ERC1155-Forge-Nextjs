@@ -15,11 +15,15 @@ interface IForgeToken {
         uint256 amount
     ) external;
 
+    function burn(address from, uint256 id, uint256 amount) external;
+
     function burnBatch(
         address from,
         uint256[] memory ids,
         uint256[] memory amounts
     ) external;
+
+    function balanceOf(address account, uint256 id) external returns (uint256);
 }
 
 contract Forge is IERC1155Receiver {
@@ -106,7 +110,13 @@ contract Forge is IERC1155Receiver {
         forgeToken.burnBatch(msg.sender, ids, burnAmounts);
     }
 
-    fallback() external payable {}
+    function trade(uint256 _toBurnId, uint256 _forId) external{
+        require(_toBurnId < 3, "can only trade tokens 0, 1  and 2");
+        forgeToken.burn(msg.sender, _toBurnId, 1);
+        forgeToken.mint(msg.sender, _forId, 1);
+    }
 
-    receive() external payable {}
+fallback() external payable {}
+
+receive() external payable {}
 }

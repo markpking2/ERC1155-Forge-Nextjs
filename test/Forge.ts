@@ -136,4 +136,20 @@ describe("Forge contract", function () {
       expect(await ForgeToken.balanceOf(addr1.address, 6)).to.equal(0);
     });
   });
+
+  describe("trade", function () {
+    it("user can trade token 6 for token 1", async () => {
+      const { ForgeToken, Forge, addr1, owner } = await loadFixture(
+        deployFixture
+      );
+
+      await ForgeToken.connect(addr1)["mint(uint256)"](0);
+      expect(await ForgeToken.balanceOf(addr1.address, 0)).to.equal(1);
+
+      await Forge.connect(addr1).trade(0, 6);
+
+      expect(await ForgeToken.balanceOf(addr1.address, 0)).to.equal(0);
+      expect(await ForgeToken.balanceOf(addr1.address, 6)).to.equal(1);
+    });
+  });
 });

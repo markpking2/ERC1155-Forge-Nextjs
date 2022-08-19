@@ -45,7 +45,11 @@ contract ForgeToken is ERC1155 {
         _mint(to, id, amount, "");
     }
 
-    function burn(address from, uint256 id, uint256 amount) external{
+    function burn(
+        address from,
+        uint256 id,
+        uint256 amount
+    ) external {
         require(msg.sender == forgeAddress, "not forge contract");
         _burn(from, id, amount);
     }

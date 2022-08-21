@@ -8,7 +8,7 @@ Deployed on Polygon Mumbai Test Network
 Try it out here! https://tokenforge.vercel.app/
 <br/>
 <br/>
-[View on OpenSea](https://testnets.opensea.io/collection/color-doge)
+[View on OpenSea](https://testnets.opensea.io/collection/token-forge)
 <br/>
 <br/>
 [ForgeToken Contract Etherscan](https://mumbai.polygonscan.com/address/0x631a050621B5b42861dC7c75d05372829F9E3F0F)

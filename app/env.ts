@@ -1,0 +1,6 @@
+export default {
+  FORGE_TOKEN_ADDRESS: process.env.NEXT_PUBLIC_FORGE_TOKEN_ADDRESS,
+  FORGE_ADDRESS: process.env.NEXT_PUBLIC_FORGE_ADDRESS,
+  CHAIN_ID: process.env.NEXT_PUBLIC_CHAIN_ID,
+  RPC_URL: process.env.NEXT_PUBLIC_RPC_URL,
+};

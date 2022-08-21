@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
-require("@nomicfoundation/hardhat-chai-matchers");
+import("@nomicfoundation/hardhat-chai-matchers");
 import { ethers, network } from "hardhat";
 
 describe("ForgeToken contract", function () {

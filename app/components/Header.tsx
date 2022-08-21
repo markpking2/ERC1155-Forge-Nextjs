@@ -8,21 +8,41 @@ import {
   Button,
 } from "@chakra-ui/react";
 import "@fontsource/medievalsharp";
-import { BsWallet2 } from "react-icons/bs";
 import "@fontsource/silkscreen";
+import { useStore } from "../hooks/store.hooks";
+import { observer } from "mobx-react";
+import { SiCurseforge } from "react-icons/si";
 
-export const Header = () => {
+export const Header = observer(() => {
+  const store = useStore();
   return (
-    <Box p={10} border={"1px"}>
-      <Flex justifyContent={"space-around"} alignItems={"center"}>
-        <Heading fontSize={"4xl"}>ERC1155 TOKEN FORGE</Heading>
+    <Box
+      p={10}
+      mb={5}
+      border={"1px"}
+      borderRadius={"10px"}
+      background={"#f5dfcb"}
+    >
+      <Flex
+        justifyContent={"space-around"}
+        alignItems={"center"}
+        flexWrap={"wrap"}
+      >
+        <Flex>
+          <Heading fontSize={"3xl"} mr={5}>
+            ERC1155 TOKEN FORGE{" "}
+          </Heading>
+          <SiCurseforge style={{ display: "inline-block", fontSize: "40px" }} />
+        </Flex>
+
         <Flex w={"30%"} justifyContent={"end"} alignItems={"center"}>
-          <Text fontSize={"sm"}>You have ??? Matic</Text>
-          <Button ml={4} fontSize={"sm"} rightIcon={<BsWallet2 />}>
-            Connect
-          </Button>
+          <Text fontSize={"lg"} fontWeight={"bold"}>
+            {!!store.signer && !!store.provider
+              ? `You have ${parseFloat(store.balance).toFixed(4)} Matic`
+              : "Not Connected"}
+          </Text>
         </Flex>
       </Flex>
     </Box>
   );
-};
+});

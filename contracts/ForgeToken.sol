@@ -6,7 +6,7 @@ pragma solidity 0.8.9;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract ForgeToken is ERC1155 {
-    address private _owner;
+    address private immutable _owner;
     address public forgeAddress;
     mapping(address => mapping(uint256 => uint256)) private _lastMintTime;
 
@@ -14,10 +14,11 @@ contract ForgeToken is ERC1155 {
         ERC1155(
             "ipfs://QmdUJdKBNmBQzXk8JTPHQCAtwXLD3GepEkvyVEgFZBCoui/{id}.json"
         )
-    {}
+    {
+        _owner = msg.sender;
+    }
 
     function setForgeAddress(address _target) external {
-        _owner = msg.sender;
         forgeAddress = _target;
     }
 
@@ -43,6 +44,10 @@ contract ForgeToken is ERC1155 {
         );
         require(id < 7, "only mint tokens 0 to 6");
         _mint(to, id, amount, "");
+    }
+
+    function burn(uint256 id, uint256 amount) external {
+        _burn(msg.sender, id, amount);
     }
 
     function burn(

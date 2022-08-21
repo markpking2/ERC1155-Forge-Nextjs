@@ -115,7 +115,8 @@ contract Forge is IERC1155Receiver {
     }
 
     function trade(uint256 _toBurnId, uint256 _forId) external {
-        require(_toBurnId < 3, "can only trade tokens 0, 1  and 2");
+        require(_forId < 3, "can only trade for tokens 0, 1  and 2");
+        require(_toBurnId != _forId, "cannot trade for the same token");
         forgeToken.burn(msg.sender, _toBurnId, 1);
         forgeToken.mint(msg.sender, _forId, 1);
     }

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
-require("@nomicfoundation/hardhat-chai-matchers");
-import { ethers, network } from "hardhat";
+import("@nomicfoundation/hardhat-chai-matchers");
+import { ethers } from "hardhat";
 
 describe("Forge contract", function () {
   async function deployFixture(autoSetAddress = true) {
@@ -146,10 +146,10 @@ describe("Forge contract", function () {
       await ForgeToken.connect(addr1)["mint(uint256)"](0);
       expect(await ForgeToken.balanceOf(addr1.address, 0)).to.equal(1);
 
-      await Forge.connect(addr1).trade(0, 6);
+      await Forge.connect(addr1).trade(0, 2);
 
       expect(await ForgeToken.balanceOf(addr1.address, 0)).to.equal(0);
-      expect(await ForgeToken.balanceOf(addr1.address, 6)).to.equal(1);
+      expect(await ForgeToken.balanceOf(addr1.address, 2)).to.equal(1);
     });
   });
 });

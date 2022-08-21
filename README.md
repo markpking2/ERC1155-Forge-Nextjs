@@ -1,5 +1,5 @@
 # ERC1155 Token Forge
-ERC1155 token forging game built using Solidity, Ethers.js, Next.js, Chakra UI.
+ERC1155 token forging game built using Solidity, Ethers.js, Next.js, and Chakra UI.
 <br/>
 <br/>
 Deployed on Polygon Mumbai Test Network

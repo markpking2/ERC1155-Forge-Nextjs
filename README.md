@@ -1,6 +1,5 @@
 # ERC1155 Token Forge
 ERC1155 token forging game built using Solidity, Ethers.js, Next.js, and Chakra UI.
-
 <p float="left">
 <img src="https://github.com/markpking2/ERC1155-Token-Forge/blob/master/Images/0.jpeg?raw=true" width="100" style="display:inline-block"/>
 <img src="https://github.com/markpking2/ERC1155-Token-Forge/blob/master/Images/1.jpeg?raw=true" width="100" style="display:inline-block"/>

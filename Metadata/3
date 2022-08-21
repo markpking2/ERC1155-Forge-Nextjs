@@ -1,0 +1,14 @@
+{
+  "image": "ipfs://QmSuqkR3QFnJrom57J4ecTSBjkDo7vJdqrUwXnm6SY9A3b/3.jpeg",
+  "name": "Forge 3",
+  "attributes": [
+    {
+      "trait_type": "Anvil",
+      "value": "Anvil"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Red Blue Gradient"
+    }
+  ]
+}

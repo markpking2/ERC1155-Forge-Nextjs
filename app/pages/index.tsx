@@ -29,9 +29,9 @@ export default observer(function Home() {
       window.ethereum.on("accountsChanged", () => {
         window.location.reload();
       });
-    }
 
-    return () => window.ethereum.removeAllListeners();
+      return () => window.ethereum.removeAllListeners();
+    }
   });
 
   useEffect(() => {
@@ -57,6 +57,7 @@ export default observer(function Home() {
           null,
           ethers.utils.hexZeroPad(store.address, 32),
         ],
+        fromBlock: "latest",
       };
 
       const getSingleTransfer = (data: BytesLike) => {
@@ -108,6 +109,7 @@ export default observer(function Home() {
           null,
           ethers.utils.hexZeroPad(ethers.constants.AddressZero, 32),
         ],
+        fromBlock: "latest",
       };
 
       store.provider.on(burnSingleFilter, (result) => {
@@ -135,6 +137,7 @@ export default observer(function Home() {
           null,
           ethers.utils.hexZeroPad(ethers.constants.AddressZero, 32),
         ],
+        fromBlock: "latest",
       };
 
       store.provider.on(burnBatchFilter, (result) => {
@@ -165,7 +168,7 @@ export default observer(function Home() {
   }, [store.provider, store.address, store.addedListeners]);
 
   return (
-    <Wrapper p={5} h={"100vh"}>
+    <Wrapper p={5} h={"100%"}>
       <>
         <Header />
         <Trade />
@@ -193,7 +196,7 @@ const Wrapper = styled(Box)`
     right: 0px;
     bottom: 0px;
     left: 0px;
-    opacity: 0.1;
+    opacity: 0.2;
     filter: grayscale(0.4);
   }
 `;

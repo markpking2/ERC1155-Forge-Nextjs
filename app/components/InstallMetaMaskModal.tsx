@@ -33,7 +33,8 @@ export const InstallMetamaskModal = observer(() => {
               color={"red"}
               isExternal
             >
-              <a> here</a>.
+              {" "}
+              here.
             </Link>
           </ModalBody>
           <ModalFooter />

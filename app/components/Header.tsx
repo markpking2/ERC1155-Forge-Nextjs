@@ -29,9 +29,21 @@ export const Header = observer(() => {
         flexWrap={"wrap"}
       >
         <Flex>
-          <Heading fontSize={"3xl"} mr={5}>
-            ERC1155 TOKEN FORGE{" "}
-          </Heading>
+          <Flex flexDirection={"column"} alignItems={"center"}>
+            <Heading fontSize={"3xl"} mr={5}>
+              ERC1155 TOKEN FORGE{" "}
+            </Heading>
+            <Text>
+              <Link
+                fontSize={"2xl"}
+                href={"https://testnets.opensea.io/collection/token-forge"}
+                color={"red"}
+                isExternal
+              >
+                View on OpenSea.
+              </Link>
+            </Text>
+          </Flex>
           <SiCurseforge style={{ display: "inline-block", fontSize: "40px" }} />
         </Flex>
 

@@ -4,8 +4,8 @@ import { BigNumber, ethers, Signer } from "ethers";
 import * as _ from "lodash/fp";
 import { JsonRpcSigner, Web3Provider } from "@ethersproject/providers";
 import env from "../env";
-import ForgeToken from "../../artifacts/contracts/ForgeToken.sol/ForgeToken.json";
-import Forge from "../../artifacts/contracts/Forge.sol/Forge.json";
+import ForgeToken from "../JSONFiles/ForgeToken.json";
+import Forge from "../JSONFiles/Forge.json";
 import { UseToastOptions, ToastPosition } from "@chakra-ui/react";
 import { createStandaloneToast } from "@chakra-ui/toast";
 const { toast } = createStandaloneToast();
@@ -83,7 +83,6 @@ export class StoreMobx {
   setInstallMetaMaskModalOpen(open: boolean) {
     this.installMetamaskModalOpen = open;
   }
-
   async promptSwitchNetwork() {
     if (this.checkMetamask()) {
       try {
@@ -100,13 +99,6 @@ export class StoreMobx {
                 {
                   chainId: "0x13881",
                   rpcUrls: ["https://rpc-mumbai.maticvigil.com"],
-                  chainName: "Polygon Testnet Mumbai",
-                  nativeCurrency: {
-                    name: "tMATIC",
-                    symbol: "tMATIC",
-                    decimals: 18,
-                  },
-                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
                 },
                 ,
               ],
@@ -218,9 +210,7 @@ export class StoreMobx {
       const tx = await forgeToken["mint(uint256)"](tokenId);
       await tx.wait();
     } catch (err) {
-      const regex = new RegExp(
-        "'tokens 0 - 2 each have a 1 min mint cooldown'"
-      );
+      const regex = new RegExp("tokens 0 - 2 each have a 1 min mint cooldown");
       if (_.get("reason", err)?.match(regex)) {
         this.error({
           title: "Mint Failed",

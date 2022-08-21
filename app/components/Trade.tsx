@@ -26,15 +26,15 @@ export const Trade = observer(() => {
           token to get another starter token.
         </Text>
       </Flex>
-      <Flex justifyContent={"space-around"} flexWrap="wrap">
+      <Flex justifyContent={"center"} flexWrap="wrap">
         {images.map((image, i) => {
           return (
             <Box display={"inline-block"} p={10} key={`trade${i}`}>
               <Flex flexDirection={"column"} alignItems={"center"}>
                 <Image
                   src={image}
-                  width={"150px"}
-                  height={"150px"}
+                  width={"100px"}
+                  height={"100px"}
                   style={{ borderRadius: "10px" }}
                 />
                 <Button

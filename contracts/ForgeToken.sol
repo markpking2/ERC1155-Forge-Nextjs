@@ -9,6 +9,7 @@ contract ForgeToken is ERC1155 {
     address private immutable _owner;
     address public forgeAddress;
     mapping(address => mapping(uint256 => uint256)) private _lastMintTime;
+    string public name = "Token Forge";
 
     constructor()
         ERC1155(

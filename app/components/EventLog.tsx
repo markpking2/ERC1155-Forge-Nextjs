@@ -30,7 +30,12 @@ export const EventLog = observer(() => {
         <Text fontSize={"2xl"}>Event Log</Text>
       </Box>
       <Box p={5} border={"1px"} borderRadius={"10px"} background={"white"}>
-        <List spacing={3} overflowY={"scroll"} maxHeight={"150px"}>
+        <List
+          spacing={3}
+          overflowY={"scroll"}
+          minHeight={"200px"}
+          maxHeight={"300px"}
+        >
           {/*@ts-ignore*/}
           {_.map.convert({ cap: false })(({ message, type }: EventType, i) => {
             return (

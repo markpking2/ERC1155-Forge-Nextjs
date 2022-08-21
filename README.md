@@ -18,6 +18,13 @@ Try it out here! https://tokenforge.vercel.app/
 <br/>
 <br/>
 Anvil image from [StickPNG](https://www.stickpng.com/)
+<br/>
+<br/>
+Screenshot:
+<p float="left">
+<img src="https://github.com/markpking2/ERC1155-Token-Forge/blob/master/Images/screenshot.png?raw=true" width="800" style="display:inline-block"/>
+</p>
+Tokens:
 <p float="left">
 <img src="https://github.com/markpking2/ERC1155-Token-Forge/blob/master/Images/0.jpeg?raw=true" width="100" style="display:inline-block"/>
 <img src="https://github.com/markpking2/ERC1155-Token-Forge/blob/master/Images/1.jpeg?raw=true" width="100" style="display:inline-block"/>

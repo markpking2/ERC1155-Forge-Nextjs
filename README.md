@@ -1,4 +1,5 @@
 # ERC1155 Token Forge
+
 ERC1155 token forging game built using Solidity, Ethers.js, Next.js, and Chakra UI.
 <br/>
 <br/>
@@ -21,6 +22,7 @@ Anvil image from [StickPNG](https://www.stickpng.com/)
 <br/>
 <br/>
 Screenshot:
+
 <p float="left">
 <img src="https://github.com/markpking2/ERC1155-Token-Forge/blob/master/Images/screenshot.png?raw=true" width="800" style="display:inline-block"/>
 </p>
@@ -36,6 +38,7 @@ Tokens:
 </p>
 
 ### Description
+
 This ERC115 token game allows a user to mint tokens 0, 1, and 2 (each having a 1 minute cooldown).
 <br/>
 <br/>
@@ -45,8 +48,13 @@ Tokens 0, 1, and 2 can be forged into tokens 3, 4, 5, and 6 buy using different 
 Any token can be traded for tokens 0, 1, and 2 and forged tokens can be burned.
 
 ### Installation
+
 `yarn install`
+
 ### Run project locally
+
 `yarn dev`
+
 ### Run tests
+
 `npx hardhat test`

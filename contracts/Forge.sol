@@ -86,15 +86,17 @@ contract Forge is IERC1155Receiver {
         );
         uint256 i;
         for (i = 0; i < length; i++) {
-            require(frequencies[ids[i]] <= 1, "token ids must be unique");
             frequencies[ids[i]]++;
+            require(frequencies[ids[i]] <= 1, "token ids must be unique");
         }
         if (length == 2) {
             if (frequencies[0] == 1 && frequencies[1] == 1) {
                 forgeToken.mint(msg.sender, 3, 1);
-            } else if (frequencies[1] == 1 && frequencies[2] == 1) {
+            }
+            if (frequencies[1] == 1 && frequencies[2] == 1) {
                 forgeToken.mint(msg.sender, 4, 1);
-            } else if (frequencies[0] == 1 && frequencies[2] == 1) {
+            }
+            if (frequencies[0] == 1 && frequencies[2] == 1) {
                 forgeToken.mint(msg.sender, 5, 1);
             }
             uint256[] memory burnAmounts = new uint256[](2);

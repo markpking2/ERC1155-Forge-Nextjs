@@ -32,10 +32,59 @@ describe("ForgeToken contract", function () {
     return await deployFixture(false);
   }
 
+  it("cannot set forge address if not owner", async () => {
+    const { ForgeToken, Forge, addr1 } = await loadFixture(dfNoAddress);
+    await expect(
+      ForgeToken.connect(addr1).setForgeAddress(Forge.address)
+    ).to.be.revertedWith("not owner");
+  });
+
   it("sets forge address", async () => {
     const { ForgeToken, Forge } = await loadFixture(dfNoAddress);
     await ForgeToken.setForgeAddress(Forge.address);
     expect(await ForgeToken.forgeAddress()).to.equal(Forge.address);
+  });
+
+  describe("burn", function () {
+    it("individual can burn a token", async () => {
+      const { ForgeToken, owner, addr1 } = await loadFixture(deployFixture);
+
+      await ForgeToken["mint(address,uint256,uint256)"](addr1.address, 1, 1);
+      expect(await ForgeToken.balanceOf(addr1.address, 1)).to.equal(1);
+
+      expect(await ForgeToken.connect(addr1)["burn(uint256,uint256)"](1, 1)).to
+        .not.be.reverted;
+
+      expect(await ForgeToken.balanceOf(addr1.address, 1)).to.equal(0);
+    });
+
+    it("cant burn from anyone if not forge contract", async () => {
+      const { ForgeToken, owner, addr1 } = await loadFixture(deployFixture);
+
+      await ForgeToken["mint(address,uint256,uint256)"](addr1.address, 1, 1);
+      expect(await ForgeToken.balanceOf(addr1.address, 1)).to.equal(1);
+
+      await expect(
+        ForgeToken.connect(addr1)["burn(address,uint256,uint256)"](
+          owner.address,
+          1,
+          1
+        )
+      ).to.be.revertedWith("not forge contract");
+    });
+
+    it("cant burn batch if not forge contract", async () => {
+      const { ForgeToken, owner, addr1 } = await loadFixture(deployFixture);
+
+      await ForgeToken["mint(address,uint256,uint256)"](addr1.address, 1, 1);
+      expect(await ForgeToken.balanceOf(addr1.address, 1)).to.equal(1);
+      await ForgeToken["mint(address,uint256,uint256)"](addr1.address, 2, 1);
+      expect(await ForgeToken.balanceOf(addr1.address, 2)).to.equal(1);
+
+      await expect(
+        ForgeToken.connect(addr1).burnBatch(owner.address, [1, 2], [1, 1])
+      ).to.be.revertedWith("not forge contract");
+    });
   });
 
   describe("minting", function () {
@@ -49,6 +98,14 @@ describe("ForgeToken contract", function () {
           100
         )
       ).to.be.revertedWith("cannot mint");
+    });
+
+    it("anyone can't mint ids > 2 ", async () => {
+      const { ForgeToken, addr1 } = await loadFixture(deployFixture);
+
+      await expect(
+        ForgeToken.connect(addr1)["mint(uint256)"](3)
+      ).to.be.revertedWith("can only mint tokens 0 - 2");
     });
 
     it("can mint to anyone if forge contract", async () => {
@@ -90,6 +147,18 @@ describe("ForgeToken contract", function () {
       );
 
       expect(await ForgeToken.balanceOf(addr1.address, 1)).to.equal(100);
+    });
+
+    it("can't mint tokens > 6", async () => {
+      const { ForgeToken, owner, addr1 } = await loadFixture(deployFixture);
+
+      await expect(
+        ForgeToken.connect(owner)["mint(address,uint256,uint256)"](
+          addr1.address,
+          7,
+          100
+        )
+      ).to.be.revertedWith("only mint tokens 0 to 6");
     });
 
     it("anyone can mint with tokens 0 - 2", async () => {
@@ -162,5 +231,15 @@ describe("ForgeToken contract", function () {
       method: "hardhat_stopImpersonatingAccount",
       params: [Forge.address],
     });
+  });
+
+  it("should invoke the fallback function", async () => {
+    const { ForgeToken, owner } = await loadFixture(deployFixture);
+    const tx = await owner.sendTransaction({
+      to: ForgeToken.address,
+      data: "0x1234",
+      value: ethers.utils.parseEther("1.0"),
+    });
+    await tx.wait();
   });
 });

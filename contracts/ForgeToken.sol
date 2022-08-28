@@ -20,11 +20,12 @@ contract ForgeToken is ERC1155 {
     }
 
     function setForgeAddress(address _target) external {
+        require(msg.sender == _owner, "not owner");
         forgeAddress = _target;
     }
 
     function mint(uint256 id) external {
-        require(id < 3, "forge tokens 0 - 2 to get tokens 3, 4, 5, and 6");
+        require(id < 3, "can only mint tokens 0 - 2");
         require(
             _lastMintTime[msg.sender][id] == 0 ||
                 block.timestamp - _lastMintTime[msg.sender][id] >= 1 minutes,
